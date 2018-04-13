@@ -1,0 +1,11 @@
+/node_modules
+/public/storage
+/public/images
+/storage/*.key
+/vendor
+/.idea
+/template
+Homestead.json
+Homestead.yaml
+.env
+/nbproject/private/
