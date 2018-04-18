@@ -1,163 +1,139 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-
-        <link href="{{ asset('admin/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('css/themify-icons.css')}}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('css/owl.carousel.min.css')}}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('css/style.css')}}" rel="stylesheet" type="text/css" />
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-
-            .nav-menu {
-                background: yellowgreen;
-                padding: 10px 0;
-            }
-        </style>
-    </head>
-
-<body data-spy="scroll" data-target="#navbar" data-offset="30">
-    <div class="nav-menu fixed-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <nav class="navbar navbar-dark navbar-expand-lg">
-                        <a class="navbar-brand" href="index.html"><img src="http://www.demo1.webbera.host/assets//uploads/2017/03/logo.png" class="img-fluid" alt="logo"></a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
-                        <div class="collapse navbar-collapse" id="navbar">
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item"> <a class="nav-link active" href="#home">HOME <span class="sr-only">(current)</span></a> </li>
-                                <li class="nav-item"> <a class="nav-link" href="#features">What To Do?</a> </li>
-                                <li class="nav-item"> <a class="nav-link" href="#gallery">Where To Go?</a> </li>
-                                <li class="nav-item"> <a class="nav-link" href="#pricing">Directory</a> </li>
-                                <li class="nav-item"> <a class="nav-link" href="#contact">Qatar</a> </li>
-                                <li class="nav-item"><a href="#" class="btn btn-outline-light my-3 my-sm-0 ml-lg-3">Login</a></li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="section">
+@include('layouts.header')
+    <br/><div class="section">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-7 content_box">
-                    <div class="col-xs12 col-sm-4">
+                    <div class="col-xs-12 col-sm-4 select_cate">
                         <select class="form-control">
-                            <option value="1">1</option>
+                            <option value="1">Any category</option>
                             <option value="1">1</option>
                             <option value="1">1</option>
                             <option value="1">1</option>
                             <option value="1">1</option>
                         </select>
-                    </div><br/>
+                    </div>
                     <div class="list_items">
+                        <div class="row result_count">
+                            <span>{{sizeof($packages)}} Results</span>
+                            <span class="pull-right">Reset</span>
+                        </div>
                         <div class="row">
                             @foreach($packages as $package)
-                                <div class="col-12 col-lg-6">
-                                    <div class="list_item">
-                                        <img src="{{asset('/images/'.$package->image)}}" alt="dual phone" height="200px">
-                                        <div class="description">
-                                             <h4 class="card-title">{{$package->title}}</h4>
-                                             <h5 class="card-title">{{$package->short_description}}</h5>
-                                             <h5><i class="mdi mdi-map-marker"></i>{{$package->location}}</h5>
+                                <div class="col-6 col-lg-6 package_list" id="package_{{$package->id}}">
+                                    <a href="{{route('package-detail')}}">
+                                        <div class="list_item">
+                                            <img src="{{asset('/images/'.$package->image)}}" alt="dual phone" height="200px">
+                                            <div class="description">
+                                                 <h4 class="card-title">{{$package->title}}</h4>
+                                                 <h5 class="card-title">{{$package->short_description}}</h5>
+                                                 <h5><i class="mdi mdi-map-marker"></i>{{$package->location}}</h5>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
                             @endforeach
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5 content_box">
+                <div class="col-md-5 content_box content_map">
+                    <input type="text" placeholder="Search location" class="form-control" id="pac-input">
+                    <a href="#" onClick="findMe()" class="findme  js-find-me"></a>
                     <div id="map"></div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- // end .section -->
-    <script>
+
+     <script>
         var list_items =JSON.parse('<?php echo $packages; ?>') ;
         var map;
+        var bounds;
+        var marker;
+        var infoBubble;
+
+        function findMe(){
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var homeMarker = new google.maps.Marker({
+                      position: {lat: position.coords.latitude, lng: position.coords.longitude},
+                      map: map,
+                      title: "Home",
+                      //icon: 'http://gaganr.in/wp-content/uploads/2016/02/128-128-258ce7d245cb4130fc4961f3e0c58060.png'
+                    });
+                    map.setCenter(homeMarker.getPosition())
+                });
+            }else {
+                // Browser doesn't support Geolocation
+                alert("Error");
+            }
+        }
         function initMap() {
+            var input = document.getElementById('pac-input');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+
+            bounds = new google.maps.LatLngBounds();
+            
             map = new google.maps.Map(document.getElementById('map'), {
-              center: {lat: -34.397, lng: 150.644},
-              zoom: 8
+              center: {lat: 25.354826, lng: 51.183884},
+              zoom: 8,
+              disableDefaultUI: true,
+              zoomControl: true,
             });
             for(var k =0; k <list_items.length; k++){
                 var latlng = {lat: list_items[k].lat, lng: list_items[k].lng};
-                var marker = new google.maps.Marker({
+                marker = new google.maps.Marker({
                   position: latlng,
                   map: map,
-                  title: 'Click to zoom'
+                  title: list_items[k].title,
+                  id: 'package_'+list_items[k].id,
+                  icon: 'http://gaganr.in/wp-content/uploads/2016/02/128-128-258ce7d245cb4130fc4961f3e0c58060.png'
                 });
+                infoBubble = new InfoBubble({
+                      map: map,
+                      content: '<div class="package_list">'+
+                                    '<a href="">'+
+                                        '<div class="list_item">'+
+                                            '<img src="http://www.demo1.webbera.host/assets//uploads/2017/03/BANANA_Principale-1500x876-450x263.jpg" alt="dual phone" height="200px">'+
+                                            '<div class="description">'+
+                                                ' <h4 class="card-title">'+list_items[k].title+'</h4>'+
+                                                 '<h5 class="card-title">'+list_items[k].short_description+'</h5>'+
+                                                 '<h5><i class="mdi mdi-map-marker"></i>'+list_items[k].location+'</h5>'+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</a>'+
+                                '</div>',
+                      position: new google.maps.LatLng(-32.0, 149.0),
+                      shadowStyle: 1,
+                      padding: 0,
+                      backgroundColor: 'rgb(57,57,57)',
+                      borderRadius: 5,
+                      arrowSize: 10,
+                      borderWidth: 1,
+                      borderColor: 'rgb(165, 165, 165)',
+                      borderStyle: 'none',
+                      disableAutoPan: true,
+                      hideCloseButton: true,
+                      arrowPosition: 30,
+                      backgroundClassName: 'transparent',
+                      arrowStyle: 2,
+                      maxWidth: 300
+                });
+
+                marker.addListener('click', function() {
+                  if($( ".package_list" ).hasClass( "active" )){
+                    $( ".package_list" ).removeClass( "active" );
+                    $("#"+this.id).addClass("active");
+                  }else{
+                    $("#"+this.id).addClass("active");
+                  }
+                  map.setCenter(this.getPosition());
+                  infoBubble.open(map, this);
+                });
+
+                bounds.extend(latlng);
             }
+            map.fitBounds(bounds);
         }
+
     </script>
-    <script src="{{ asset('js/jquery-3.2.1.min.js')}}"></script>
-    <script src="{{ asset('js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{ asset('js/owl.carousel.min.js')}}"></script>
-    <script src="{{ asset('js/script.js')}}"></script>
-     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpYrBVXnKTS2H0zulB8P3AY-ZCOtcBMt0&libraries=places&callback=initMap"
-async defer></script>
-
-</body>
-
-</html>
+@include('layouts.footer')

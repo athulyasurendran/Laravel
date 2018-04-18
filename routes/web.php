@@ -20,7 +20,8 @@ Auth::routes();
 Route::get('/logout','Auth\LoginController@logout');
 Route::get('/home', 'HomeController@index');
 Route::get('search', ['as' => 'search', 'uses' => 'HomeController@search']);
-
+Route::get('package-detail', ['as' => 'package-detail', 'uses' => 'HomeController@detail']);
+Route::get('list/{dta}', ['as' => 'list', 'uses' => 'HomeController@detail']);
 Route::get('/theme', 'FrontController@theme');
 
 Route::group(['prefix'=>'manager','middleware'=>'auth'],function(){
@@ -29,6 +30,5 @@ Route::group(['prefix'=>'manager','middleware'=>'auth'],function(){
     })->name('admin.index');
     Route::resource('package','PackageController');
     Route::resource('category','CategoryController');
-    
 });
 Route::get('/{theme}', 'FrontController@theme1');

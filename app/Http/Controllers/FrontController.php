@@ -37,4 +37,8 @@ class FrontController extends Controller
     {
         echo $theme;
     }
+    public static function get_header()
+    {
+        echo view('layouts.header');
+    }
 }

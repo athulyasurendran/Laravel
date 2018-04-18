@@ -28,7 +28,7 @@ class HomeController extends Controller
     
     public function index()
     {
-        return view('admin.home');
+        return view('admin.index');
     }
 
     public function getPackage(){
@@ -40,5 +40,11 @@ class HomeController extends Controller
         $search  = Input::get('search') ;
         $packages = Package::getPackages();
         return view('list',compact('packages'));
+    }
+
+    public function detail()
+    {
+        $packages = Package::getPackages();
+        return view('list-detail',compact('packages'));
     }
 }

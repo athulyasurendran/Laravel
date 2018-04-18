@@ -153,7 +153,7 @@ p.lead {
 }
 
 .section {
-    padding: 80px 0;
+    padding: 45px 0;
 }
 
 .section-title {
@@ -185,10 +185,10 @@ p.lead {
 
 .nav-menu.is-scrolling,
 .nav-menu.menu-is-open {
-    background-color: rgb(74, 13, 143);
-    background: -moz-linear-gradient(135deg, rgb(74, 13, 143) 0%, rgb(250, 42, 143) 100%);
+    background-color: #27273e;
+    /*background: -moz-linear-gradient(135deg, rgb(74, 13, 143) 0%, rgb(250, 42, 143) 100%);
     background: -webkit-linear-gradient(135deg, rgb(74, 13, 143) 0%, rgb(250, 42, 143) 100%);
-    background: linear-gradient(135deg, rgb(74, 13, 143) 0%, rgb(250, 42, 143) 100%);
+    background: linear-gradient(135deg, rgb(74, 13, 143) 0%, rgb(250, 42, 143) 100%);*/
     -webkit-box-shadow: 0px 5px 23px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 5px 23px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 5px 23px 0px rgba(0, 0, 0, 0.1);
@@ -236,14 +236,16 @@ header {
     padding: 100px 0 0;
     text-align: center;
     color: #FFF;
-    height: 80%;
+    height: 90%;
 }
 
 .bg-gradient {
-    background-image: -moz-linear-gradient( 135deg, rgba(60, 8, 118, 0.8) 0%, rgba(250, 0, 118, 0.8) 100%);
+    /*background-image: -moz-linear-gradient( 135deg, rgba(60, 8, 118, 0.8) 0%, rgba(250, 0, 118, 0.8) 100%);
     background-image: -webkit-linear-gradient( 135deg, rgba(60, 8, 118, 0.8) 0%, rgba(250, 0, 118, 0.8) 100%);
     background-image: -ms-linear-gradient( 135deg, rgba(60, 8, 118, 0.8) 0%, rgba(250, 0, 118, 0.8) 100%);
-    background-image: linear-gradient( 135deg, rgba(60, 8, 118, 0.8) 0%, rgba(250, 0, 118, 0.8) 100%);
+    background-image: linear-gradient( 135deg, rgba(60, 8, 118, 0.8) 0%, rgba(250, 0, 118, 0.8) 100%);*/
+    background-image: url(http://www.demo1.webbera.host/assets//uploads/2015/10/New-Doha-Skyline-Qatar.jpg);
+    background-repeat: round;
 }
 
 .tagline {
@@ -661,8 +663,18 @@ header {
     font-family: sans-serif;
 }
 .list_items{
-    padding: 12px;
+    padding: 26px;
     background: #f3f3f2;
+}
+.select_cate{
+    padding: 1.5em;
+}
+.result_count{
+    padding: 12px 24px;
+    display: list-item;
+}
+.pull-right{
+    float: right;
 }
 .content_box{
     padding: 0;
@@ -692,6 +704,204 @@ header {
     padding: 10px 0 0;
 }
 #map {
-    height: 500px;
+    height: 90%;
     width: 100%;
 }
+.package_detail img{
+    width: 100%;
+    max-height: 450px;
+}
+.package_detail .details{
+    padding: 2em;
+}
+.package_detail .details h5{
+    font-size: 40px;
+    padding: 12px 0;
+}
+.package_detail .details h6{
+        font-size: 20px;
+}
+.list_items .active{
+    box-shadow: 0px 0px 5px 10px #888888;
+}
+.second_description{
+    background: whitesmoke;
+    padding: 2em;
+}
+.second_description .description{
+    background: white;
+    padding: 2em;
+}
+.second_description h6{
+    font-size: 18px;
+    line-height: 28px;
+}
+#map-container{
+    height: 250px;
+}
+.map_div{
+    background: white;
+    padding: 1em;
+    border: 1px solid #dcdada;
+}
+.map_handler{
+    position: absolute;
+    right: 0;
+    top: 515px;
+}
+.map_div h5{
+    font-size: 16px;
+    padding-top: 26px;
+    font-weight: 600;
+    padding-bottom: 20px;
+    margin: 0;
+}
+.client-logos{
+    padding: 1em;
+}
+.client-logos a{
+    color: #486f73;
+    padding-left: 5em;
+    display: inline-grid;
+}
+.package_list a{
+    color: #8d1b3d;
+    text-decoration: none;
+}
+.js-find-me{
+    background: white url(../images/findme.svg) center no-repeat;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.5) 0 1px 2px;
+    display: block;
+    height: 21px;
+    /* left: 720px; */
+    margin-left: 20px;
+    position: fixed;
+    top: 130px;
+    width: 21px;
+    z-index: 1000;
+}
+#pac-input{
+    position: absolute;
+    z-index: 4;
+    width: 40%;
+}
+.content_map{
+    position: fixed;
+    right: 0;
+    height: 100%;
+}
+
+/** Login **/
+
+.form-body{
+    padding:20px;
+}
+.login-form{
+    background:rgba(255,255,255,0.8);
+    padding:20px;
+    border-top:3px solid#3e4043;
+}
+.innter-form{
+    padding-top:20px;
+}
+.final-login li{
+    width:100%;
+}
+
+.nav-tabs {
+    border-bottom: none !important;
+}
+
+.nav-tabs>li{
+    color:#222 !important;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+    color: #fff;
+    background-color: #d14d42;
+    border: none !important;
+    border-bottom-color: transparent;
+    border-radius:none !important;
+}
+.nav-tabs>li>a {
+    margin-right: 2px;
+    line-height: 1.428571429;
+    border: none !important;
+    border-radius:none !important;
+    text-transform:uppercase;
+    font-size:16px;
+}
+
+.social-login{
+    text-align:center;
+    font-size:12px;
+}
+.social-login p{
+    margin:15px 0;
+}
+.social-login ul{
+    margin:0;
+    padding:0;
+    list-style-type:none;
+}
+.social-login ul li{
+    width:50%;
+    float:left;
+    clear:fix;
+}
+.social-login ul li a{
+    font-size:13px;
+    color:#fff;
+    text-decoration:none;
+    padding:10px 0;
+    display:block;
+}
+.social-login ul li:nth-child(1) a{
+    background:#3b5998;
+}
+.social-login ul li:nth-child(2) a{
+    background:#e74c3d;
+}
+.social-login ul li:nth-child(3) a{
+    background:#3698d9;
+}
+.sa-innate-form input[type=text], input[type=password], input[type=file], textarea, select, email{
+    font-size:13px;
+    padding:10px;
+    border:1px solid#ccc;
+    outline:none;
+    width:100%;
+    margin:8px 0;
+    
+}
+.sa-innate-form input[type=submit]{
+    border:1px solid#e64b3b;
+    background:#e64b3b;
+    color:#fff;
+    padding:10px 25px;
+    font-size:14px;
+    margin-top:5px;
+    }
+    .sa-innate-form input[type=submit]:hover{
+    border:1px solid#db3b2b;
+    background:#db3b2b;
+    color:#fff;
+    }
+    
+    .sa-innate-form button{
+    border:1px solid#e64b3b;
+    background:#e64b3b;
+    color:#fff;
+    padding:10px 25px;
+    font-size:14px;
+    margin-top:5px;
+    }
+    .sa-innate-form button:hover{
+    border:1px solid#db3b2b;
+    background:#db3b2b;
+    color:#fff;
+    }
+    .sa-innate-form p{
+        font-size:13px;
+        padding-top:10px;
+    }
