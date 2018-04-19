@@ -9,7 +9,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
+        <link href="{{ asset('admin/css/icons.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('admin/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/themify-icons.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/owl.carousel.min.css')}}" rel="stylesheet" type="text/css" />
@@ -138,7 +138,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <nav class="navbar navbar-dark navbar-expand-lg">
-                            <a class="navbar-brand" href="index.html"><img src="http://www.demo1.webbera.host/assets//uploads/2017/03/logo.png" class="img-fluid" alt="logo"></a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+                            <a class="navbar-brand" href="#">
+                                <img src="http://www.demo1.webbera.host/assets//uploads/2017/03/logo.png" class="img-fluid" alt="logo"></a>
+                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
                             <div class="collapse navbar-collapse" id="navbar">
                                 <ul class="navbar-nav ml-auto"><!-- 
                                     <li class="nav-item"> <a class="nav-link active" href="#home">HOME <span class="sr-only">(current)</span></a> </li> -->
@@ -169,9 +171,18 @@
                                     <div class="dropdown">
                                       <button class="dropbtn nav-link">Qatar</button>
                                     </div>
-                                    <div class="dropdown">
-                                      <button class="dropbtn nav-link"><a href="{{ url('/login') }}">Login</a></button>
-                                    </div>
+                                    @if (Auth::check())
+                                        <li class="dropdown">
+                                            <button class="dropbtn nav-link">
+                                                <a href="{{ url('/logout') }}">{{ Auth::user()->name }} <span class="caret"></span></a>
+                                            </button>
+                                        </li>
+                                    @else
+                                        <div class="dropdown">
+                                          <button class="dropbtn nav-link"><a href="{{ url('/login') }}">Login</a></button>
+                                        </div>
+                                    @endif
+                                    
                                 </ul>
                             </div>
                         </nav>

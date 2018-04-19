@@ -43,8 +43,13 @@ class HomeController extends Controller
         return view('list',compact('packages'));
     }
 
-    public function detail(){
-        $package = Package::getbyId(3);
+    public function detail($id){
+        $package = Package::getbyId($id);
+        return view('list-detail',compact('package'));
+    }
+
+    public function detailCat($id){
+        $package = Package::getbyId(1);
         return view('list-detail',compact('package'));
     }
 }

@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="package_detail">
-                    <img src="http://www.demo1.webbera.host/assets//uploads/2017/03/BANANA_Principale-1500x876.jpg" alt="">
+                    <img src="{{asset('/images/'.$package->image)}}" alt="">
                     <div class="details">
                         <h5>{{$package->title}}</h5>
                         <h6>{{$package->short_description}}</h6>
@@ -17,6 +17,39 @@
                     </div><br/><br/>
                     <div class="description">
                         <h6>Rate and write a review</h6>
+                        <div class="review_box">
+                            <div class="form-group row">
+                                {{ Form::label('short_description', 'Your Review', array('class'=>'col-12 col-form-label'))}}
+                                <div class="col-12">
+                                    {{ Form::textarea('short_description', null, array('class'=>'form-control','placeholder'=>'Tell about your experience','rows'=>7))}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {{ Form::label('short_description', 'Your overall rating of this listing:', array('class'=>'col-12 col-form-label'))}}
+                                <div class="col-12">
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-6">
+                                    {{ Form::label('name', 'Name', array('class'=>'col-form-label'))}}
+                                    <div class="">
+                                        {{ Form::text('name', null, array('class'=>'form-control','placeholder'=>'Name'))}}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    {{ Form::label('email', 'Email', array('class'=>'col-form-label'))}}
+                                    <div class="">
+                                        {{ Form::text('name', null, array('class'=>'form-control','placeholder'=>'Email'))}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    {{ Form::submit('Submit your review', array('class'=>'btn btn-info pull-left'))}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4 map_handler">
@@ -28,6 +61,8 @@
                     </div><br/><br/>
                     <div class="map_div">
                         <h4> Write a review </h4>
+                        <div class="photo_gallery">
+                        </div>
                     </div>
                 </div>
             </div>

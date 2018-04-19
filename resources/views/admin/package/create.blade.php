@@ -230,7 +230,7 @@
         autocomplete.addListener('place_changed', function() {
             var place = autocomplete.getPlace();
             var lat = place.geometry.location.lat();
-            var lng = place.geometry.location.lat();
+            var lng = place.geometry.location.lng();
             $("#lat").val(lat);
             $("#lng").val(lng);
         });

@@ -5,11 +5,11 @@
                 <div class="col-md-7 content_box">
                     <div class="col-xs-12 col-sm-4 select_cate">
                         <select class="form-control">
-                            <option value="1">Any category</option>
-                            <option value="1">1</option>
-                            <option value="1">1</option>
-                            <option value="1">1</option>
-                            <option value="1">1</option>
+                            <option value="">Any category</option>
+                            <option value="1">Arts & Entertainment</option>
+                            <option value="2">Art Gallery</option>
+                            <option value="3">Movie Theater</option>
+                            <option value="4">Museum</option>
                         </select>
                     </div>
                     <div class="list_items">
@@ -20,7 +20,7 @@
                         <div class="row">
                             @foreach($packages as $package)
                                 <div class="col-6 col-lg-6 package_list" id="package_{{$package->id}}">
-                                    <a href="{{route('package-detail')}}">
+                                    <a href="{{route('package-detail', $package->id)}}">
                                         <div class="list_item">
                                             <img src="{{asset('/images/'.$package->image)}}" alt="dual phone" height="200px">
                                             <div class="description">
@@ -70,12 +70,15 @@
         function initMap() {
             var input = document.getElementById('pac-input');
             var autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.addListener('place_changed', function() {
+              var place = autocomplete.getPlace();
+              map.setCenter(place.geometry.location);
+            });
 
             bounds = new google.maps.LatLngBounds();
-            
             map = new google.maps.Map(document.getElementById('map'), {
               center: {lat: 25.354826, lng: 51.183884},
-              zoom: 6,
+              zoom: 9,
               disableDefaultUI: true,
               zoomControl: true,
             });
@@ -86,7 +89,7 @@
                   map: map,
                   title: list_items[k].title,
                   id: 'package_'+list_items[k].id,
-                  icon: 'http://gaganr.in/wp-content/uploads/2016/02/128-128-258ce7d245cb4130fc4961f3e0c58060.png'
+                  icon: './images/marker.png'
                 });
                 infoBubble = new InfoBubble({
                       map: map,
@@ -103,9 +106,8 @@
                                     '</a>'+
                                 '</div>',
                       position: new google.maps.LatLng(-32.0, 149.0),
-                      shadowStyle: 1,
                       padding: 0,
-                      backgroundColor: 'rgb(57,57,57)',
+                      backgroundColor: '#ffff',
                       borderRadius: 5,
                       arrowSize: 10,
                       borderWidth: 1,
@@ -114,7 +116,6 @@
                       disableAutoPan: true,
                       hideCloseButton: true,
                       arrowPosition: 30,
-                      backgroundClassName: 'transparent',
                       arrowStyle: 2,
                       maxWidth: 300
                 });
@@ -132,7 +133,9 @@
 
                 bounds.extend(latlng);
             }
-            map.fitBounds(bounds);
+            if(list_items.length > 0){
+              map.fitBounds(bounds);
+            }
         }
 
     </script>

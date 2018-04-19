@@ -44,11 +44,15 @@ class Package extends Model {
         return true;
     }
 
-    public static function searchPackages($lat=25.354826, $lng=51.183884) {
+    public static function searchPackages($lat, $lng) {
         $circle_radius = 3959;
-        $max_distance = 20;
+        $max_distance = 500;
         $lat = $lat;
         $lng = $lng;
+        if(!$lat || !$lng){
+            $lat = 25.354826;
+            $lng = 51.183884;
+        }
 
      $result = DB::select('SELECT * FROM
                 (SELECT *, (' . $circle_radius . ' * acos(cos(radians(' . $lat . ')) * cos(radians(lat)) *

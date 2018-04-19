@@ -246,6 +246,7 @@ header {
     background-image: linear-gradient( 135deg, rgba(60, 8, 118, 0.8) 0%, rgba(250, 0, 118, 0.8) 100%);*/
     background-image: url(http://www.demo1.webbera.host/assets//uploads/2015/10/New-Doha-Skyline-Qatar.jpg);
     background-repeat: round;
+    opacity: 0.9;
 }
 
 .tagline {
@@ -257,8 +258,8 @@ header {
 }
 
 .img-holder {
-    height: 0;
-    padding-bottom: 33%;
+    height: 50px;
+    padding-bottom: 0;
     overflow: hidden;
 }
 
@@ -667,7 +668,7 @@ header {
     background: #f3f3f2;
 }
 .select_cate{
-    padding: 1.5em;
+    padding: 1em;
 }
 .result_count{
     padding: 12px 24px;
@@ -704,7 +705,10 @@ header {
     padding: 10px 0 0;
 }
 #map {
-    height: 90%;
+    height: 88%;
+    width: 100%;
+}
+.package_detail{
     width: 100%;
 }
 .package_detail img{
@@ -722,7 +726,7 @@ header {
         font-size: 20px;
 }
 .list_items .active{
-    box-shadow: 0px 0px 5px 10px #888888;
+    box-shadow: 0px 0px 5px 5px #888888;
 }
 .second_description{
     background: whitesmoke;
@@ -761,8 +765,11 @@ header {
 }
 .client-logos a{
     color: #486f73;
-    padding-left: 5em;
+    padding: 0 2em;
     display: inline-grid;
+}
+#contact{
+    background: #e6e6e6;
 }
 .package_list a{
     color: #8d1b3d;
@@ -792,6 +799,13 @@ header {
     height: 100%;
 }
 
+.navbar-dark .navbar-nav .nav-link{
+    color: white;
+}
+.nav-link a{
+    color: white;
+    text-decoration: none;
+}
 /** Login **/
 
 .form-body{
