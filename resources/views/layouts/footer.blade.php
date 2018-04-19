@@ -1,5 +1,5 @@
     <footer class="footer text-right">
-      2018 © Highdmin. - Coderthemes.com
+      2018 © QatarZap. - Qatarzap.com
     </footer>
     <script src="{{ asset('js/jquery-3.2.1.min.js')}}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js')}}"></script>

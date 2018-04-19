@@ -42,21 +42,23 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
-         $this->validate($request,[
-            // 'title' => 'required|min:3|max:35',
-            // 'slug' => 'required|unique:slugs,name',
+        $this->validate($request,[
+            'title' => 'required|min:3|max:35',
+            'location' => 'required',
+            'phone' => 'required',
             // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2000',
             // 'icon' => 'icon|mimes:jpeg,png,jpg,gif,svg|max:2000',
         ],[
-            // 'name.required' => ' The first name field is required.',
-            // 'name.min' => ' The first name must be at least 5 characters.',
-            // 'name.max' => ' The first name may not be greater than 35 characters.',
+            'title.required' => 'Title field is required.',
+            'name.min' => ' Title must be at least 5 characters.',
+            'name.max' => ' Title may not be greater than 35 characters.',
+            'location' => 'Location field is required.',
+            'phone' => 'Phone field is required.',
             
         ]);
         $insert = Package::savePackage($request);
         Session::flash('message', 'Package added Successfully!'); 
         Session::flash('alert-class', 'alert-success');
-        
         return redirect()->route('package.index');
     }
     
@@ -104,31 +106,27 @@ class PackageController extends Controller
     {
         $saved_package = Package::getbyId($id);
 
-        $slug_id = 0;
-        
-
         if(!($saved_package) || empty ($saved_package)){
             Session::flash('message', 'Item could not be found!'); 
             Session::flash('alert-class', 'alert-danger');
        
             return redirect()->route('package.index');
         }
-
-        
-        $slug_id = $saved_package->slug_id;
-        
         
         $this->validate($request,[
-            'name' => 'required|min:3|max:35',
-            'slug' => 'required|unique:slugs,name,'.$slug_id,
-            'icon' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2000',
+            'title' => 'required|min:3|max:35',
+            'location' => 'required',
+            'phone' => 'required',
+            // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2000',
+            // 'icon' => 'icon|mimes:jpeg,png,jpg,gif,svg|max:2000',
         ],[
-            'name.required' => ' The first name field is required.',
-            'name.min' => ' The first name must be at least 5 characters.',
-            'name.max' => ' The first name may not be greater than 35 characters.',
+            'title.required' => 'Title field is required.',
+            'name.min' => ' Title must be at least 5 characters.',
+            'name.max' => ' Title may not be greater than 35 characters.',
+            'location' => 'Location field is required.',
+            'phone' => 'Phone field is required.',
             
         ]);
-
        
         $insert = Package::updatePackage($request,$id);
         Session::flash('message', 'Package updated Successfully!'); 

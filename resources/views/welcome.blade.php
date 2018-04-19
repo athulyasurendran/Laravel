@@ -1,5 +1,4 @@
 {{App\Http\Controllers\FrontController::get_header()}}
-
     <header class="bg-gradient" id="home">
         <div class="container mt-5">
             <h1>Explore the beauty of Qatar</h1>
@@ -7,13 +6,15 @@
         </div>
         <div class="img-holder mt-3 search_control">
 
-            {!! Form::open(['route' => 'search' ,'method' => 'GET' ,'files' => true]) !!}
+            {!! Form::open(['route' => array('search') ,'method' => 'GET' ,'files' => true]) !!}
                 <div class="form-group row">
                     <div class="col-12">
-                        {{ Form::text('search', null, array('class'=>'input', 'placeholder'=>'What are you looking for?'))}}
-                         {{ Form::submit('Search', array('class'=>'button'))}}
+                        {{ Form::text('location', null, array('class'=>'input', 'id'=>'searchloc', 'placeholder'=>'What are you looking for?'))}}
+                        {{ Form::submit('Search', array('class'=>'button'))}}
                     </div>
                 </div>
+                <input type="hidden" name="latitude" id="lat">
+                <input type="hidden" name="longitude" id="lng">
             {!! Form::close() !!}
         </div>
     </header>
@@ -194,4 +195,19 @@
         </div>
     </div>
 
+<script type="text/javascript">
+    function initMap() {
+        var input = document.getElementById('searchloc');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.setComponentRestrictions(
+        {'country': ['qa']});
+        autocomplete.addListener('place_changed', function() {
+            var place = autocomplete.getPlace();
+            var lat = place.geometry.location.lat();
+            var lng = place.geometry.location.lng();
+            $("#lat").val(lat);
+            $("#lng").val(lng)
+        });
+    }
+</script>
     @include('layouts.footer')

@@ -11,10 +11,6 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', 'HomeController@getPackage');
 Auth::routes();
 Route::get('/logout','Auth\LoginController@logout');

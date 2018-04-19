@@ -45,7 +45,7 @@
     </div>
 
      <script>
-        var list_items =JSON.parse('<?php echo $packages; ?>') ;
+        var list_items =JSON.parse('<?php echo json_encode($packages); ?>') ;
         var map;
         var bounds;
         var marker;
@@ -75,7 +75,7 @@
             
             map = new google.maps.Map(document.getElementById('map'), {
               center: {lat: 25.354826, lng: 51.183884},
-              zoom: 8,
+              zoom: 6,
               disableDefaultUI: true,
               zoomControl: true,
             });

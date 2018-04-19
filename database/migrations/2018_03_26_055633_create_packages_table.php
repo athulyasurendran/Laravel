@@ -22,7 +22,7 @@ class CreatePackagesTable extends Migration
             $table->float('lng');
             $table->text('short_description');
             $table->text('description');
-            $table->integer('phone');
+            $table->string('phone');
             $table->string('email');
             $table->string('image')->nullable();
             $table->timestamps();

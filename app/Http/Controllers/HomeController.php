@@ -37,14 +37,14 @@ class HomeController extends Controller
     }
 
     public function search(){
-        $search  = Input::get('search') ;
-        $packages = Package::getPackages();
+        $latitude  = Input::get('latitude');
+        $longitude  = Input::get('longitude');
+        $packages = Package::searchPackages($latitude, $longitude);
         return view('list',compact('packages'));
     }
 
-    public function detail()
-    {
-        $packages = Package::getPackages();
-        return view('list-detail',compact('packages'));
+    public function detail(){
+        $package = Package::getbyId(3);
+        return view('list-detail',compact('package'));
     }
 }

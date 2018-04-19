@@ -11,17 +11,7 @@
             @endphp
             @if(isset($saved_package) && isset($saved_package->id) && $saved_package->id >0)
                 <h4 class="m-t-0 header-title">Edit Package</h4>
-                @php
-                    $show=$saved_package->show_front;
-                    $order=$saved_package->order;
-                    if ($saved_package->image && $saved_package->image !='' && file_exists( public_path() . '/images/' . $saved_package->image)) {
-                        $img = 'images/' . $saved_package->image ;
-                    } 
-                     if ($saved_package->icon && $saved_package->icon !='' && file_exists( public_path() . '/images/' . $saved_package->icon)) {
-                        $icon = 'images/' . $saved_package->icon ;
-                    } 
-                @endphp
-
+            
                 @else
                     <h4 class="m-t-0 header-title">Add Package</h4>
                 @php
@@ -113,6 +103,7 @@
                                 {{ Form::label('phone', 'Phone', array('class'=>'col-2 col-form-label'))}}
                                 <div class="col-10">
                                      {{ Form::number('phone', null, array('class'=>'form-control','placeholder'=>'Phone'))}}
+                                     <span class="text-danger">{{ $errors->first('phone') }}</span>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -234,6 +225,7 @@
 <script type="text/javascript">
    (function ($) {
         var input = document.getElementById('locationinput');
+        console.log(input);
         var autocomplete = new google.maps.places.Autocomplete(input);
         autocomplete.addListener('place_changed', function() {
             var place = autocomplete.getPlace();

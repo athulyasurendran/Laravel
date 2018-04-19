@@ -5,8 +5,8 @@
                 <div class="package_detail">
                     <img src="http://www.demo1.webbera.host/assets//uploads/2017/03/BANANA_Principale-1500x876.jpg" alt="">
                     <div class="details">
-                        <h5>Banana Island</h5>
-                        <h6>Banana Island Resort features 800-metre private beach</h6>
+                        <h5>{{$package->title}}</h5>
+                        <h6>{{$package->short_description}}</h6>
                     </div>
                 </div>
             </div>
