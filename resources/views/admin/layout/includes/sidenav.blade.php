@@ -30,6 +30,9 @@
                             <li>
                                 <a href="{{route('package.index')}}"><i class="fi-bag"></i>  <span> Packages </a>
                             </li> 
+                            <li>
+                                <a href="{{route('member.index')}}"><i class="fi-bag"></i>  <span> Members </a>
+                            </li> 
                         </ul>
                     </div>
                     <!-- Sidebar -->

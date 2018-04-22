@@ -7,6 +7,8 @@ use App\Package;
 use App\Http\Requests ;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Auth;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -17,7 +19,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -32,8 +34,7 @@ class HomeController extends Controller
     }
 
     public function getPackage(){
-        $packages = Package::getPackages();
-        return view('welcome',compact('packages'));
+        return $this->checkRole();
     }
 
     public function search(){
@@ -51,5 +52,16 @@ class HomeController extends Controller
     public function detailCat($id){
         $package = Package::getbyId(1);
         return view('list-detail',compact('package'));
+    }
+
+    public function checkRole(){
+        $id = Auth::user()->id;
+        $currentuser = User::find($id);
+        if($currentuser->role == "user"){
+            $packages = Package::getPackages();
+            return view('welcome',compact('packages'));
+        }else{
+            return $this->index();
+        }
     }
 }

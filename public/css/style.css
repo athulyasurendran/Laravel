@@ -611,6 +611,13 @@ header {
 }
 
 
+.infobox .list_item h4{
+    padding: 4px 0 0 !important;
+}
+
+.infobox .list_item img {
+    max-height: 180px !important;
+}
 /*  FOOTER
 ----------------------*/
 
@@ -681,9 +688,7 @@ header {
     padding: 0;
 }
 .list_item{
-    border: 3px solid rgba(0, 0, 0, 0.075);
     border-radius: 4px;
-    min-height: 350px;
     background: rgba(255, 255, 250, 0.7686274509803922);
 }
 .list_item img{
@@ -697,12 +702,40 @@ header {
     text-transform: capitalize;
     margin: 0px;
 }
+.list_item .view_more{
+    text-align: center;
+    background: #bdbdbd;
+    padding: 6px;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+.list_item .view_more span{
+    color: white;
+}
 .list_item .description{
-    padding: 8px;
+    padding: 0em 1em 0px 1em;
+    border: 1px solid #dadada;
+}
+.infobox .list_item .description{
+    border: none;
+}
+.right_list .list_item{
+    min-height: 400px;
+}
+.right_list .list_item .description{
+    height: 167px;
+}
+.mdi-map-marker{
+    font-size: 18px;
+    color: sienna;
 }
 .list_item h5{
-    font-size: 16px;
+    font-size: 14px;
     padding: 10px 0 0;
+    line-height: 20px;
+    font-family: sans-serif;
+    font-weight: 300;
+    color: #ababab;
 }
 #map {
     height: 88%;
@@ -725,7 +758,7 @@ header {
 .package_detail .details h6{
         font-size: 20px;
 }
-.list_items .active{
+.list_items .active .list_item{
     box-shadow: 0px 0px 5px 5px #888888;
 }
 .second_description{
