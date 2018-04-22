@@ -43,19 +43,17 @@ class PackageController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'title' => 'required|min:3|max:35',
+            'title' => 'required',
+            'description' => 'required',
             'location' => 'required',
             'phone' => 'required',
-            // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2000',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2000',
+            'profileimage' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2000',
             // 'icon' => 'icon|mimes:jpeg,png,jpg,gif,svg|max:2000',
         ],[
-            'title.required' => 'Title field is required.',
-            'name.min' => ' Title must be at least 5 characters.',
-            'name.max' => ' Title may not be greater than 35 characters.',
-            'location' => 'Location field is required.',
-            'phone' => 'Phone field is required.',
-            
+            'title.required' => 'Name field is required.',
         ]);
+        
         $insert = Package::savePackage($request);
         Session::flash('message', 'Package added Successfully!'); 
         Session::flash('alert-class', 'alert-success');
@@ -114,18 +112,15 @@ class PackageController extends Controller
         }
         
         $this->validate($request,[
-            'title' => 'required|min:3|max:35',
+            'title' => 'required',
+            'description' => 'required',
             'location' => 'required',
             'phone' => 'required',
-            // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2000',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2000',
+            'profileimage' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2000',
             // 'icon' => 'icon|mimes:jpeg,png,jpg,gif,svg|max:2000',
         ],[
-            'title.required' => 'Title field is required.',
-            'name.min' => ' Title must be at least 5 characters.',
-            'name.max' => ' Title may not be greater than 35 characters.',
-            'location' => 'Location field is required.',
-            'phone' => 'Phone field is required.',
-            
+            'title.required' => 'Name field is required.',
         ]);
        
         $insert = Package::updatePackage($request,$id);

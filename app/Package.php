@@ -29,16 +29,23 @@ class Package extends Model {
             $data->image->move(public_path('images'), $image);
         }
         $package = Package::create([
-            'title' => $data->title,
-            'type' => $data->type,
+            'name' => $data->title,
+            'description' => $data->description,
+            //'type' => $data->type,
             'location' => $data->location,
             'lat' => $data->lat,
             'lng' => $data->lng,
-            'short_description' => $data->short_description,
-            'description' => $data->description,
             'phone' => $data->phone,
-            'email' => $data->email,
-            'image' => $image,
+            'company_tagline' => $data->company_tagline,
+            'company_website' => $data->company_website,
+            'company_facebook' => $data->company_facebook,
+            'company_email' => $data->company_email,
+            'company_twitter' => $data->company_twitter,
+            'company_instagram' => $data->company_instagram,
+            'rate' => $data->rate,
+            //'fetured_post' => $data->fetured_post,
+            'background_image' => $image,
+            'profile_image' => $image,
         ]);
         $package_id = $package->id;
         return true;

@@ -51,17 +51,17 @@
                         @endif
                         
                             <div class="form-group row">
-                                {{ Form::label('title', 'Title', array('class'=>'col-2 col-form-label'))}}
+                                {{ Form::label('title', 'Name', array('class'=>'col-2 col-form-label'))}}
                                 <div class="col-10">
-                                    {{ Form::text('title', null, array('class'=>'form-control','placeholder'=>'Title'))}}
+                                    {{ Form::text('title', null, array('class'=>'form-control','placeholder'=>'Name'))}}
                                     <span class="text-danger">{{ $errors->first('title') }}</span>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{ Form::label('type', 'Type', array('class'=>'col-2 col-form-label'))}}
+                                {{ Form::label('description', 'Description', array('class'=>'col-2 col-form-label'))}}
                                 <div class="col-10">
-                                    {{ Form::text('type', null, array('class'=>'form-control','placeholder'=>'Type'))}}
-                                    <span class="text-danger">{{ $errors->first('type') }}</span>
+                                    {{ Form::textarea('description', null, array('class'=>'form-control summernote','placeholder'=>'Description'))}}
+                                    <span class="text-danger">{{ $errors->first('description') }}</span>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -82,32 +82,63 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{ Form::label('short_description', 'Short Description', array('class'=>'col-2 col-form-label'))}}
-                                <div class="col-10">
-                                    {{ Form::textarea('short_description', null, array('class'=>'form-control','placeholder'=>'Short Description','rows'=>3))}}
-                                </div>
-                            </div>
-                           <div class="form-group row">
-                                {{ Form::label('description', 'Description', array('class'=>'col-2 col-form-label'))}}
-                                <div class="col-10">
-                                    {{ Form::textarea('description', null, array('class'=>'form-control summernote','placeholder'=>'Description'))}}
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                {{ Form::label('email', 'Mail', array('class'=>'col-2 col-form-label'))}}
-                                <div class="col-10">
-                                     {{ Form::text('email', null, array('class'=>'form-control','placeholder'=>'Mail'))}}
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 {{ Form::label('phone', 'Phone', array('class'=>'col-2 col-form-label'))}}
                                 <div class="col-10">
                                      {{ Form::number('phone', null, array('class'=>'form-control','placeholder'=>'Phone'))}}
                                      <span class="text-danger">{{ $errors->first('phone') }}</span>
                                 </div>
                             </div>
+                            <!-- <div class="form-group row">
+                                {{ Form::label('type', 'Type', array('class'=>'col-2 col-form-label'))}}
+                                <div class="col-10">
+                                    {{ Form::text('type', null, array('class'=>'form-control','placeholder'=>'Type'))}}
+                                    <span class="text-danger">{{ $errors->first('type') }}</span>
+                                </div>
+                            </div>-->
                             <div class="form-group row">
-                                {{ Form::label('image', 'Image', array('class'=>'col-2 col-form-label'))}}
+                                {{ Form::label('company_tagline', 'Company Tagline', array('class'=>'col-2 col-form-label'))}}
+                                <div class="col-10">
+                                     {{ Form::text('company_tagline', null, array('class'=>'form-control','placeholder'=>'Company Tagline'))}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {{ Form::label('company_email', 'Company Mail', array('class'=>'col-2 col-form-label'))}}
+                                <div class="col-10">
+                                     {{ Form::text('company_email', null, array('class'=>'form-control','placeholder'=>'Company Mail'))}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {{ Form::label('company_website', 'Company Website', array('class'=>'col-2 col-form-label'))}}
+                                <div class="col-10">
+                                     {{ Form::text('company_website', null, array('class'=>'form-control','placeholder'=>'Company Website'))}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {{ Form::label('company_facebbok', 'Facebook', array('class'=>'col-2 col-form-label'))}}
+                                <div class="col-10">
+                                     {{ Form::text('company_facebbok', null, array('class'=>'form-control','placeholder'=>'Facebook'))}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {{ Form::label('company_twitter', 'Twitter', array('class'=>'col-2 col-form-label'))}}
+                                <div class="col-10">
+                                     {{ Form::text('company_twitter', null, array('class'=>'form-control','placeholder'=>'Twitter'))}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {{ Form::label('company_insta', 'Instagram', array('class'=>'col-2 col-form-label'))}}
+                                <div class="col-10">
+                                     {{ Form::text('company_insta', null, array('class'=>'form-control','placeholder'=>'Instagram'))}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {{ Form::label('rating', 'Rate', array('class'=>'col-2 col-form-label'))}}
+                                <div class="col-10">
+                                     {{ Form::text('rating', null, array('class'=>'form-control','placeholder'=>'Rate'))}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {{ Form::label('image', 'Background Image', array('class'=>'col-2 col-form-label'))}}
                                 <div class="col-10">
                                     <div class="fileupload fileupload-new" data-provides="fileupload">
                                         <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
@@ -125,81 +156,25 @@
                                     <span class="text-danger">{{ $errors->first('image') }}</span>
                                 </div>
                             </div>
-                           <!--   <div class="form-group row">
-                                {{ Form::label('show_front', 'Show in Front', array('class'=>'col-2 col-form-label'))}}
-                                <div class="col-10">
-                                    <div class="radio radio-success form-check-inline">
-                                        {{ Form::radio('show_front', 1, 1==$show, ['class' => '','id'=>'show']) }} 
-                                        <label for="show_front"> Yes </label>
-                                    </div>
-                                    <div class="radio radio-danger form-check-inline">
-                                        {{ Form::radio('show_front', 0, 0==$show, ['class' => '','id'=>'hide']) }} 
-                                        <label for="hide"> No </label>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
                             <div class="form-group row">
-                                {{ Form::label('icon', 'Icon', array('class'=>'col-2 col-form-label'))}}
+                                {{ Form::label('profileImage', 'Profile Image', array('class'=>'col-2 col-form-label'))}}
                                 <div class="col-10">
                                     <div class="fileupload fileupload-new" data-provides="fileupload">
                                         <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                                            <img src="{{ asset($icon)}}" alt="image" />
+                                            <img src="{{ asset($img)}}" alt="image" />
                                         </div>
                                         <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                                         <div>
                                             <button type="button" class="btn btn-custom btn-file">
-                                                <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Select Icon</span>
+                                                <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Select image</span>
                                                 <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
-                                                {{ Form::file('icon', array('class'=>'btn-light'))}}
+                                                {{ Form::file('profileimage', array('class'=>'btn-light'))}}
                                             </button>
                                         </div>
                                     </div>
-                                    <span class="text-danger">{{ $errors->first('icon') }}</span>
-                                </div>
-                            </div> -->
-                        
-                        
-<!--                            -->
-                            <!-- <div class="form-group row">
-                                {{ Form::label('order', 'Sort Order', array('class'=>'col-2 col-form-label'))}}
-                                <div class="col-10">
-                                    {{ Form::number('order', $order, array('class'=>'form-control','placeholder'=>'Sort Order'))}}
+                                    <span class="text-danger">{{ $errors->first('profileimage') }}</span>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                {{ Form::label('meta_title', 'Meta Tag Title', array('class'=>'col-2 col-form-label'))}}
-                                <div class="col-10">
-                                    {{ Form::text('meta_title', null, array('class'=>'form-control','placeholder'=>'Meta Title'))}}
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                {{ Form::label('meta_description', 'Meta Tag description', array('class'=>'col-2 col-form-label'))}}
-                                <div class="col-10">
-                                    {{ Form::textarea('meta_description', null, array('class'=>'form-control','placeholder'=>'Meta Tag description','rows'=>3))}}
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                {{ Form::label('meta_keywords', 'Meta Tag keywords', array('class'=>'col-2 col-form-label'))}}
-                                <div class="col-10">
-                                    {{ Form::textarea('meta_keywords', null, array('class'=>'form-control','placeholder'=>'Meta Tag keywords','rows'=>3))}}
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                {{ Form::label('status', 'Status', array('class'=>'col-2 col-form-label'))}}
-                                <div class="col-10">
-                                    <div class="radio radio-success form-check-inline">
-                                        {{ Form::radio('status', 1, 1==1, ['class' => '','id'=>'st-active']) }} 
-                                        <label for="st-active"> Active </label>
-                                    </div>
-                                    <div class="radio radio-danger form-check-inline">
-                                        {{ Form::radio('status', 0, 0==1, ['class' => '','id'=>'st-inactive']) }} 
-                                        <label for="st-inactive"> No </label>
-                                    </div>
-                                </div>
-                            </div> -->
-                            
                             <div class="form-group row">
                                 <div class="offset-2 col-10 ">
                                     {{ Form::submit('Add', array('class'=>'btn btn-info pull-right'))}}

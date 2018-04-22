@@ -15,16 +15,23 @@ class CreatePackagesTable extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->string('type');
+            $table->string('name');
+            $table->text('description');
+            $table->string('listing_type_menu'); // What to do
             $table->string('location');
             $table->float('lat');
             $table->float('lng');
-            $table->text('short_description');
-            $table->text('description');
             $table->string('phone');
-            $table->string('email');
-            $table->string('image')->nullable();
+            $table->text('company_tagline');
+            $table->text('company_website');
+            $table->text('company_facebook');
+            $table->text('company_email');
+            $table->text('company_twitter');
+            $table->text('company_instagram');
+            $table->string('fetured_post');
+            $table->string('rate');
+            $table->string('background_image')->nullable();
+            $table->string('profile_image')->nullable();
             $table->timestamps();
         });
     }
