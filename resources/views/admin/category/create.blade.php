@@ -3,28 +3,20 @@
 <div class="row">
     <div class="col-12">
         <div class="card-box">
-            @php
-                $show=1;
-                $img='admin/images/small/default.jpg';
-                $order=0;
-            @endphp
             @if(isset($saved_category) && isset($saved_category->id) && $saved_category->id >0)
                 <h4 class="m-t-0 header-title">Edit Category</h4>
                 @php
                     $show=$saved_category->top;
                     $order=$saved_category->order;
-                    if ($saved_category->image && $saved_category->image !='' && file_exists( public_path() . '/images/' . $saved_category->image)) {
-                        $img = 'images/' . $saved_category->image ;
-                    } 
-                    
                 @endphp
-
-                @else
-                    <h4 class="m-t-0 header-title">Add Category</h4>
+            @else
                 @php
-                    
+                    $show=0;
+                    $order=0;
                 @endphp
-                @endif
+                <h4 class="m-t-0 header-title">Add Category</h4>
+                
+            @endif
             <p class="text-muted m-b-30 font-14">
 
             </p>
@@ -65,22 +57,28 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                {{ Form::label('image', 'Image', array('class'=>'col-2 col-form-label'))}}
+                                {{ Form::label('parent', 'Parent', array('class'=>'col-2 col-form-label'))}}
                                 <div class="col-10">
-                                    <div class="fileupload fileupload-new" data-provides="fileupload">
-                                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                                            <img src="{{ asset($img)}}" alt="image" />
-                                        </div>
-                                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                                        <div>
-                                            <button type="button" class="btn btn-custom btn-file">
-                                                <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Select image</span>
-                                                <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
-                                                {{ Form::file('image', array('class'=>'btn-light'))}}
-                                            </button>
-                                        </div>
+                                    {{ Form::select('parent', $categories ,null,  array('class'=>'form-control select2'))}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {{ Form::label('show', 'Show in menu', array('class'=>'col-2 col-form-label'))}}
+                                <div class="col-10">
+                                    <div class="radio radio-success form-check-inline">
+                                        {{ Form::radio('show', 1, 1==$show, ['class' => '','id'=>'show']) }} 
+                                        <label for="show"> Yes </label>
                                     </div>
-                                    <span class="text-danger">{{ $errors->first('image') }}</span>
+                                    <div class="radio radio-danger form-check-inline">
+                                        {{ Form::radio('show', 0, 0==$show, ['class' => '','id'=>'hide']) }} 
+                                        <label for="hide"> No </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                {{ Form::label('order', 'Sort Order', array('class'=>'col-2 col-form-label'))}}
+                                <div class="col-10">
+                                    {{ Form::number('order', $order, array('class'=>'form-control','placeholder'=>'Sort Order'))}}
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -140,8 +138,3 @@
 <link href="{{ asset('plugins/select2/css/select2.min.css')}}" rel="stylesheet">
 <link href="{{ asset('plugins/bootstrap-fileupload/bootstrap-fileupload.css')}}" rel="stylesheet">
 @endsection
-<!--<script src="../plugins/bootstrap-fileupload/bootstrap-fileupload.js"></script>
-<script src="../plugins/dropzone/dropzone.js"></script
-
-        <link href="../plugins/bootstrap-fileupload/bootstrap-fileupload.css" rel="stylesheet" />
-        <link href="../plugins/dropzone/dropzone.css" rel="stylesheet" type="text/css" />>-->

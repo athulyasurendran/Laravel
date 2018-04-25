@@ -31,7 +31,7 @@
                     </a>
                     <div > <!--  class="company-detail"-->
                         <h4 class="mb-1">{{$package->title}}</h4>
-                        <p>{!!$package->short_description !!}</p>
+                        <p>{!!$package->company_tagline !!}</p>
 
                     </div>
 

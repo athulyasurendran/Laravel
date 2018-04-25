@@ -9,55 +9,41 @@ use Illuminate\Support\Facades\DB;
 
 class Category extends Model {
 
-    protected $fillable = ['name', 'image', 'status'];
+    protected $fillable = ['name', 'parent', 'top', 'order', 'status'];
     protected $table = 'categories';
 
+    public static function tree() {
+
+    return static::with(implode('.', array_fill(0, 4, 'children')))
+        ->select('categories.id', 'categories.name', 'categories.top', 'categories.order', 'categories.status')
+        ->where('parent', '=', 0)
+         ->orderBy('order')->orderBy('name')->get();
+    }
+
+	public function children() {
+    	return $this->hasMany(Category::class, 'parent', 'id')
+            ->select('categories.*')
+            ->orderBy('order')->orderBy('name');
+	}
+
     public static function saveCategory($data) {
-        $imageName = '';
+	    $category = Category::create([
+	        'name' => $data->name,
+	        'parent' => $data->parent,
+	        'top' => $data->show,
+	        'order' => $data->order,
+	        'status' => $data->status,
+	    ]);
+	    return true;
+	}
 
-        if ($data->image) {
-            $imageName = $data->name . time() . '.' . $data->image->getClientOriginalExtension();
-            $data->image->move(public_path('images'), $imageName);
-        }
-        $category = Category::create([
-                    'name' => $data->name,
-                    'image' => $imageName,
-                    'status' => $data->status,
-        ]);
-        $category_id = $category->id;
-        
-        return true;
-    }
-
-public static function updateCategory($data, $id) {
-    $imageName = Category::getImagebyId($id);
-
-    if ($data->image) {
-        if ($imageName != "") {
-            if (file_exists(public_path('images/' . $imageName))) {
-                unlink(public_path('images/' . $imageName));
-            }
-        }
-        $imageName = $data->slug . time() . '.' . $data->image->getClientOriginalExtension();
-        $data->image->move(public_path('images'), $imageName);
-    }
-    Category::find($id)->update([
-        'name' => $data->name,
-        'description' => $data->description,
-        'image' => $imageName,
-        'parent' => $data->parent,
-        'top' => $data->show,
-        'order' => $data->order,
-        'status' => $data->status,]);
-
-
-    return DB::table('slugs')->where(array('type_id'=> $id,'type'=> 'category'))->update([
-                'name' => $data->slug,
-                'type' => 'category',
-                'type_id' => $id,
-                'title' => $data->meta_title,
-                'description' => $data->meta_description,
-                'keywords' => $data->meta_keywords,]);
-}
-
+	public static function updateCategory($data, $id) {
+	    Category::find($id)->update([
+	        'name' => $data->name,
+	        'parent' => $data->parent,
+	        'top' => $data->show,
+	        'order' => $data->order,
+	        'status' => $data->status,]);
+	    return;
+	}
 }

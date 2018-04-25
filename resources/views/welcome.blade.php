@@ -63,10 +63,10 @@
                     <div class="col-6 col-lg-3 package_list">
                         <a href="{{route('package-detail', $package->id)}}">
                             <div class="list_item">
-                                <img src="{{asset('/images/'.$package->image)}}" alt="dual phone" height="200px">
+                                <img src="{{asset('/images/'.$package->background_image)}}" alt="dual phone" height="200px">
                                 <div class="description">
                                     <h4 class="card-title">{{$package->title}}</h4>
-                                    <h5 class="card-title">{{$package->short_description}}</h5>
+                                    <h5 class="card-title">{{$package->description}}</h5>
                                     <h5><i class="mdi mdi-map-marker"></i>{{$package->location}}</h5>
                                 </div>
                             </div>
@@ -88,10 +88,10 @@
                     <div class="col-6 col-lg-3 package_list">
                         <a href="{{route('package-detail', $package->id)}}">
                             <div class="list_item">
-                                <img src="{{asset('/images/'.$package->image)}}" alt="dual phone" height="200px">
+                                <img src="{{asset('/images/'.$package->background_image)}}" alt="dual phone" height="200px">
                                 <div class="description">
                                     <h4 class="card-title">{{$package->title}}</h4>
-                                    <h5 class="card-title">{{$package->short_description}}</h5>
+                                    <h5 class="card-title">{{$package->description}}</h5>
                                     <h5><i class="mdi mdi-map-marker"></i>{{$package->location}}</h5>
                                 </div>
                             </div>
@@ -114,10 +114,10 @@
                     <div class="col-6 col-lg-3 package_list">
                         <a href="{{route('package-detail', $package->id)}}">
                             <div class="list_item">
-                                <img src="{{asset('/images/'.$package->image)}}" alt="dual phone" height="200px">
+                                <img src="{{asset('/images/'.$package->background_image)}}" alt="dual phone" height="200px">
                                 <div class="description">
                                     <h4 class="card-title">{{$package->title}}</h4>
-                                    <h5 class="card-title">{{$package->short_description}}</h5>
+                                    <h5 class="card-title">{{$package->description}}</h5>
                                     <h5><i class="mdi mdi-map-marker"></i>{{$package->location}}</h5>
                                 </div>
                             </div>

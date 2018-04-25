@@ -20,13 +20,8 @@ Route::get('/package-detail/{id}', ['as' => 'package-detail', 'uses' => 'HomeCon
 Route::get('list/{dta}', ['as' => 'list', 'uses' => 'HomeController@detailCat']);
 Route::get('/theme', 'FrontController@theme');
 
-Route::group(['prefix'=>'verify','middleware'=>'auth'],function(){
-    Route::get('/', 'HomeController@checkRole')->name('verify');
-});
-
 Route::group(['prefix'=>'manager','middleware'=>'auth'],function(){
     Route::get('/', 'HomeController@checkRole')->name('admin.index');
-
     Route::resource('package','PackageController');
     Route::resource('category','CategoryController');
     Route::resource('member','MemberController');

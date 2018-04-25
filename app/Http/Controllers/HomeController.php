@@ -55,11 +55,16 @@ class HomeController extends Controller
     }
 
     public function checkRole(){
-        $id = Auth::user()->id;
-        $currentuser = User::find($id);
-        if($currentuser->role == "user"){
-            $packages = Package::getPackages();
-            return view('welcome',compact('packages'));
+        if(Auth::user()){
+            return 'ddd';
+            $id = Auth::user()->id;
+            $currentuser = User::find($id);
+            if($currentuser->role == "user"){
+                $packages = Package::getPackages();
+                return view('welcome',compact('packages'));
+            }else{
+                return $this->index();
+            }
         }else{
             return $this->index();
         }

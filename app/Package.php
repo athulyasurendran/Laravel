@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class Package extends Model {
 
-    protected $fillable = ['title', 'type', 'location', 'lat', 'lng', 'short_description', 'description', 'phone', 'email', 'image'];
+    protected $fillable = ['title', 'description', 'listing_type_menu', 'location', 'lat', 'lng', 'phone', 'company_tagline', 'company_website', 'company_facebook', 'company_email', 'company_twitter', 'company_instagram', 'rate', 'background_image', 'profile_image'];
     protected $table = 'packages';
 
     public static function getPackages() {
@@ -23,15 +23,21 @@ class Package extends Model {
 
     public static function savePackage($data) {
         $image = '';
-        
         if ($data->image) {
             $image = $data->title . time() . '.' . $data->image->getClientOriginalExtension();
             $data->image->move(public_path('images'), $image);
         }
+
+        $profileimage = '';
+        if ($data->profileimage) {
+            $profileimage = $data->title . time() . '.' . $data->profileimage->getClientOriginalExtension();
+            $data->profileimage->move(public_path('images'), $profileimage);
+        }
+
         $package = Package::create([
-            'name' => $data->title,
+            'title' => $data->title,
             'description' => $data->description,
-            //'type' => $data->type,
+            'listing_type_menu' => $data->category_id,
             'location' => $data->location,
             'lat' => $data->lat,
             'lng' => $data->lng,
@@ -45,7 +51,7 @@ class Package extends Model {
             'rate' => $data->rate,
             //'fetured_post' => $data->fetured_post,
             'background_image' => $image,
-            'profile_image' => $image,
+            'profile_image' => $profileimage,
         ]);
         $package_id = $package->id;
         return true;
@@ -80,17 +86,30 @@ class Package extends Model {
             $image = $data->title . time() . '.' . $data->image->getClientOriginalExtension();
             $data->image->move(public_path('images'), $image);
         }
+        
+        $profileimage = '';
+        if ($data->profileimage) {
+            $profileimage = $data->title . time() . '.' . $data->profileimage->getClientOriginalExtension();
+            $data->profileimage->move(public_path('images'), $profileimage);
+        }
         Package::find($id)->update([
             'title' => $data->title,
-            'type' => $data->type,
+            'description' => $data->description,
+            'listing_type_menu' => $data->category_id,
             'location' => $data->location,
             'lat' => $data->lat,
             'lng' => $data->lng,
-            'short_description' => $data->short_description,
-            'description' => $data->description,
             'phone' => $data->phone,
-            'email' => $data->email,
-            'image' => $image
+            'company_tagline' => $data->company_tagline,
+            'company_website' => $data->company_website,
+            'company_facebook' => $data->company_facebook,
+            'company_email' => $data->company_email,
+            'company_twitter' => $data->company_twitter,
+            'company_instagram' => $data->company_instagram,
+            'rate' => $data->rate,
+            //'fetured_post' => $data->fetured_post,
+            'background_image' => $image,
+            'profile_image' => $profileimage,
         ]);
     }
 

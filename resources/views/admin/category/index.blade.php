@@ -39,7 +39,47 @@
                         <th >Action</th>
                     </tr>
                 </thead>
-                
+                <tbody>
+                    @foreach($categories as $category)
+                        <tr>
+                        <td>{{$category->name}}</td>
+                        <td>{{$category->order}}</td>
+                        <td><span class="badge label-table {{$category->status=='1' ? 'badge-success' :'badge-danger'}}">{{$category->status=='1' ? 'Active' :'Inactive'}}</span></td>
+                        <td class="text-right"><a href="{{ URL::route('category.edit', $category->id) }}" >
+                                <button class="btn btn-info waves-effect waves-light btn-sm "  data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit">
+                                    <i class="mdi mdi-lead-pencil" ></i>
+                                </button></a>
+                        </td>
+                    </tr>
+                            @foreach($category['children'] as $child)
+                            <tr>
+                                <td>{{$category->name}} -> {{$child->name}}</td>
+                                <td>{{$child->order}}</td>
+                                <td><span class="badge label-table {{$child->status=='1' ? 'badge-success' :'badge-danger'}}">{{$child->status=='1' ? 'Active' :'Inactive'}}</span></td>
+                                <td class="text-right" ><a href="{{ URL::route('category.edit', $child->id) }}" >
+                                        <button class="btn btn-info waves-effect waves-light btn-sm "  data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit">
+                                            <i class="mdi mdi-lead-pencil" ></i>
+                                        </button></a>
+                                </td>
+                            </tr>
+                                @foreach($child['children'] as $child2)
+                                <tr>
+                                    <td>{{$category->name}} -> {{$child->name}} -> {{$child2->name}}</td>
+                                    <td>{{$child2->order}}</td>
+                                    <td><span class="badge label-table {{$child2->status=='1' ? 'badge-success' :'badge-danger'}}">{{$child2->status=='1' ? 'Active' :'Inactive'}}</span></td>
+                                    <td class="text-right"><a href="{{ URL::route('category.edit', $child2->id) }}" >
+                                            <button class="btn btn-info waves-effect waves-light btn-sm "  data-toggle="tooltip" data-placement="left" title="" data-original-title="Edit">
+                                                <i class="mdi mdi-lead-pencil" ></i>
+                                            </button></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            @endforeach
+                        
+                    @endforeach
+                    
+                    
+                </tbody>
                 <tfoot>
                     <tr class="active">
                         <td colspan="5">

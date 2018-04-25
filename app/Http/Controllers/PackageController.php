@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Package;
 use Session;
-
+use App\Category;
+use App\Http\Controllers\HomeController;
 
 class PackageController extends Controller
 {
@@ -13,15 +14,17 @@ class PackageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function __construct()
+     public function __construct(HomeController $homeCtrl)
     {
         $this->middleware('auth');
+        $this->homeCtrl = $homeCtrl;
+        return $this->homeCtrl->checkRole();
     }
     
     public function index()
     {
-         $packages = Package::getPackages();
-         return view('admin.package.index',compact('packages'));
+        $packages = Package::getPackages();
+        return view('admin.package.index',compact('packages'));
     }
     
     /**
@@ -31,7 +34,20 @@ class PackageController extends Controller
      */
     public function create()
     {
-        return view('admin.package.create');
+        $categories_tree = Category::tree();
+        $categories[0]='None';
+        if(!empty($categories_tree)){
+            foreach ($categories_tree as $categories_val){
+                $categories[$categories_val->id]=$categories_val->name;
+                if(!empty($categories_val['children'])) {
+                    foreach ($categories_val['children'] as $categories_val1){
+                        $categories[$categories_val1->id]=$categories_val->name.' -> '.$categories_val1->name;
+                    }
+                }
+            }
+        }
+
+        return view('admin.package.create', compact('categories'));
     }
 
     /**
@@ -87,10 +103,23 @@ class PackageController extends Controller
        
             return redirect()->route('package.index');
         }
-        
+
+        $categories_tree = Category::tree();
+        $categories[0]='None';
+        if(!empty($categories_tree)){
+            foreach ($categories_tree as $categories_val){
+                $categories[$categories_val->id]=$categories_val->name;
+                if(!empty($categories_val['children'])) {
+                    foreach ($categories_val['children'] as $categories_val1){
+                        $categories[$categories_val1->id]=$categories_val->name.' -> '.$categories_val1->name;
+                    }
+                }
+            }
+        }
+
        $packages = Package::getPackages();
         
-        return view('admin.package.create', compact('packages','saved_package'));
+        return view('admin.package.create', compact('packages','saved_package','categories'));
     }
 
     /**

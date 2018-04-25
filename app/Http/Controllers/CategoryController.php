@@ -20,7 +20,8 @@ class CategoryController extends Controller
     }
     
     public function index()
-    {     
+    {
+        $categories = Category::tree();
         return view('admin.category.index', compact('categories'));
     }
     
@@ -33,6 +34,19 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $categories_tree = Category::tree();
+        $categories[0]='None';
+        if(!empty($categories_tree)){
+            foreach ($categories_tree as $categories_val){
+                $categories[$categories_val->id]=$categories_val->name;
+                if(!empty($categories_val['children'])) {
+                    foreach ($categories_val['children'] as $categories_val1){
+                        $categories[$categories_val1->id]=$categories_val->name.' -> '.$categories_val1->name;
+                    }
+                }
+            }
+        }
+        
         return view('admin.category.create', compact('categories'));
     }
 
@@ -45,13 +59,11 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            // 'name' => 'required|min:3|max:35',
-            // 'slug' => 'required|unique:slugs,name',
-            // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2000',
+            'name' => 'required|min:3|max:35',
         ],[
-            // 'name.required' => ' The first name field is required.',
-            // 'name.min' => ' The first name must be at least 5 characters.',
-            // 'name.max' => ' The first name may not be greater than 35 characters.',
+            'name.required' => ' The first name field is required.',
+            'name.min' => ' The first name must be at least 5 characters.',
+            'name.max' => ' The first name may not be greater than 35 characters.',
             
         ]);
         $insert = Category::saveCategory($request);
@@ -80,7 +92,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $saved_category = Category::getbyId($id);
+        $saved_category = Category::find($id);
 
         if(!($saved_category) || empty ($saved_category)){
             Session::flash('message', 'Item could not be found!'); 
@@ -115,10 +127,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $saved_category = Category::getbyId($id);
-
-        $slug_id = 0;
-        
+        $saved_category = Category::find($id);
 
         if(!($saved_category) || empty ($saved_category)){
             Session::flash('message', 'Item could not be found!'); 
@@ -126,15 +135,9 @@ class CategoryController extends Controller
        
             return redirect()->route('category.index');
         }
-
-        
-        $slug_id = $saved_category->slug_id;
-        
         
         $this->validate($request,[
             'name' => 'required|min:3|max:35',
-            'slug' => 'required|unique:slugs,name,'.$slug_id,
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2000',
         ],[
             'name.required' => ' The first name field is required.',
             'name.min' => ' The first name must be at least 5 characters.',
@@ -147,9 +150,6 @@ class CategoryController extends Controller
         Session::flash('alert-class', 'alert-success');
         
         return redirect()->route('category.index');
-        
-        
-
     }
 
     /**

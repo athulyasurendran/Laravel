@@ -65,6 +65,12 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                {{ Form::label('category_id', 'Category', array('class'=>'col-2 col-form-label'))}}
+                                <div class="col-10">
+                                    {{ Form::select('category_id', $categories ,null, array('class'=>'form-control'))}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 {{ Form::label('location', 'Location', array('class'=>'col-2 col-form-label'))}}
                                 <div class="col-10">
                                     {{ Form::text('location', null, array('class'=>'form-control','placeholder'=>'Location', 'id'=>'locationinput'))}}
